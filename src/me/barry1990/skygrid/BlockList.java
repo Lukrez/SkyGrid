@@ -6,14 +6,23 @@ import org.bukkit.Material;
 
 
 public class BlockList {
-
+	
+	public static final short STONE = (short)Material.STONE.getId();
+	
+	public static final short GRANITE_STONE = (short)((1 << 12) | STONE);
+	public static final short POLISHED_GRANITE_STONE = (short)((2 << 12) | STONE);
+	public static final short DIORITE_STONE = (short)((3 << 12) | STONE);
+	public static final short POLISHED_DIORITE_STONE = (short)((4 << 12) | STONE);
+	public static final short ANDESITE_STONE = (short)((5 << 12) | STONE);
+	public static final short POLISHED_ANDESITE_STONE = (short)((6 << 12) | STONE);
+	
+	
 	//list of blocks used for the grid
 	static private Material[] common_materiallist = null;
 	static private Material[] rare_materiallist = null;
 	static private Material[] materiallist = null;
-	static private short[] materialListID = null;
 	
-	public static short getRandomMaterial(Random random) {
+	public static Material getRandomMaterial(Random random) {
 		
 		// init the list
 		if (BlockList.materiallist == null) {
@@ -95,16 +104,23 @@ public class BlockList {
 					};
 		}
 		
-		int materialListID_c = materiallist.length;
 		
-		if (materialListID == null) {
-			materialListID = new short[materialListID_c];
-			for (int i = 0; i< materialListID_c; i++) {
-				materialListID[i] = (short) materiallist[i].getId();
-			}
-		}		
+		return BlockList.materiallist[random.nextInt(BlockList.materiallist.length)];
+	}
+	
+	public short getRandomStoneType(Random random) {
+		switch (random.nextInt(7)) {
+			case 0 : return GRANITE_STONE; 
+			case 1 : return POLISHED_GRANITE_STONE;
+			case 2 : return DIORITE_STONE;
+			case 3 : return POLISHED_DIORITE_STONE;
+			case 4 : return ANDESITE_STONE;
+			case 5 : return POLISHED_ANDESITE_STONE;
+			case 6 : return STONE;
+		}
+		//we should never get here
+		return STONE;
 		
-		return BlockList.materialListID[random.nextInt(materialListID_c)];
 	}
 	
 }

@@ -2,6 +2,7 @@ package me.barry1990.skygrid;
 
 import java.util.Random;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -22,11 +23,7 @@ public class SkyGridGenerator extends ChunkGenerator {
 							
 				for (int x = 1; x < 16; x=x+4) {
 					
-						//this.setBlock(result, x, y, z, (byte) BlockList.getRandomMaterial(random).getId());
-					/*if ((chunkX == 100) && (chunkZ == 100))
-						this.setBlock(result, x, y, z, (byte) y);
-					else */
-						this.setBlock(result, x, y, z, BlockList.getRandomMaterial(random));
+						this.setBlock(result, x, y, z, (short) BlockList.getRandomMaterial(random).getId());
 				}			
 				
 			}
@@ -36,6 +33,11 @@ public class SkyGridGenerator extends ChunkGenerator {
 		return result;
 	}
 	
+	@Override
+    public Location getFixedSpawnLocation(World world, Random random)
+    {
+        return new Location(world, 1, 122, 1);
+    }		
 	
     void setBlock(short[][] result, int x, int y, int z, short blkid) {
 	    // is this chunk part already initialized?
@@ -46,4 +48,5 @@ public class SkyGridGenerator extends ChunkGenerator {
 	    // set the block
 	    result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
     }
+    
 }
