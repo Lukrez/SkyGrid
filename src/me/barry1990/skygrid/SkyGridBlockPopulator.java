@@ -14,6 +14,8 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 
 		// TODO Auto-generated method stub
 		
+		/* fill Chests */
+		
 	}
 
 }

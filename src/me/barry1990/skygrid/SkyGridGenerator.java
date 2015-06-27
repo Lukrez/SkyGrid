@@ -14,7 +14,9 @@ public class SkyGridGenerator extends ChunkGenerator {
 	
 		byte[][] result = new byte[world.getMaxHeight() / 16][]; //world height / chunk part height (=16)
 		
-		
+		/*
+		 *  Generate the grid 
+		 */
 		
 		
 		return result;
