@@ -3,6 +3,7 @@ package me.barry1990.skygrid;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -23,7 +24,16 @@ public class SkyGridGenerator extends ChunkGenerator {
 							
 				for (int x = 1; x < 16; x=x+4) {
 					
-						this.setBlock(result, x, y, z, (short) BlockList.getRandomMaterial(random).getId());
+					Material m = BlockList.getRandomMaterial(random);
+					switch (m) {
+						case STONE : {
+							this.setBlock(result, x, y, z, BlockList.getRandomStoneType(random));
+						}
+						default:
+							this.setBlock(result, x, y, z, (short) m.getId());
+					
+					}
+
 				}			
 				
 			}

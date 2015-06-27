@@ -108,7 +108,7 @@ public class BlockList {
 		return BlockList.materiallist[random.nextInt(BlockList.materiallist.length)];
 	}
 	
-	public short getRandomStoneType(Random random) {
+	public static short getRandomStoneType(Random random) {
 		switch (random.nextInt(7)) {
 			case 0 : return GRANITE_STONE; 
 			case 1 : return POLISHED_GRANITE_STONE;
