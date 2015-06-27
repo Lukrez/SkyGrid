@@ -1,4 +1,5 @@
 package me.barry1990.skygrid;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
@@ -26,7 +27,7 @@ public class SkyGrid extends JavaPlugin {
 	
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-	
+		this.getLogger().info(ChatColor.YELLOW+"getDefaultWorldGenerator celled");
 		return new SkyGridGenerator();
 	}
 	
