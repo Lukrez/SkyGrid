@@ -1,17 +1,16 @@
 package me.barry1990.skygrid;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
-import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
+import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.material.Wool;
 
 
 public class SkyGridGenerator extends ChunkGenerator {
@@ -38,8 +37,7 @@ public class SkyGridGenerator extends ChunkGenerator {
 						this.setBlock(result, x, y, z, (short)material.getId() );
 						if (material == Material.WOOL){
 							ComplexBlock cb = new ComplexBlock(material, x+chunkX*16, y, z+chunkZ*16);
-							queue.add(cb);
-							//System.out.println("adding "+cb.toString());							
+							queue.add(cb);				
 						}
 				}			
 				
@@ -48,6 +46,11 @@ public class SkyGridGenerator extends ChunkGenerator {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public List<BlockPopulator> getDefaultPopulators(World world) {
+		return Arrays.asList((BlockPopulator)new SkyGridBlockPopulator());
 	}
 	
 	@Override
