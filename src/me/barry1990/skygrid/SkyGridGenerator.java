@@ -7,6 +7,12 @@ import org.bukkit.generator.ChunkGenerator;
 
 
 public class SkyGridGenerator extends ChunkGenerator {
+	
+	private SkyGrid plugin;
+	
+	public SkyGridGenerator(SkyGrid p) {
+		this.plugin = p;
+	}
 
 	@Override
 	public byte[][] generateBlockSections(World world, Random random, int chunkX,
@@ -14,25 +20,24 @@ public class SkyGridGenerator extends ChunkGenerator {
 	
 		byte[][] result = new byte[world.getMaxHeight() / 16][]; //world height / chunk part height (=16)
 		
-		/* Generate the grid */
+		/* generate the grid */
 		
-		for (int y = 0; y < 256; y++) {
+		for (int y = 0; y < 256; y=y+4) {
+		
+			for (int z = 0; z < 16; z=z+4) {
+							
+				for (int x = 0; x < 16; x=x+4) {
+					
+						this.setBlock(result, x, y, z, (byte) BlockList.getRandomMaterial(random).getId());	
 				
-			if (y % 3 != 0) 
-				continue;
+				}			
+				
+			}
 			
-			for (int z = 0;   z < 256; z++) {
-				
-				if (z % 3 != 0)
-					continue;
-				
-				for (int x = 0; x < 256; x++) {
-					
-					this.setBlock(result, x, y, z, (byte) BlockList.getRandomMaterial(random).getId());	
-					
-				}				
-			}			
 		}
+			
+			
+		
 		
 		return result;
 	}
