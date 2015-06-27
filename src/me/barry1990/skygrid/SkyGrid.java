@@ -1,5 +1,8 @@
 package me.barry1990.skygrid;
-import org.bukkit.ChatColor;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
@@ -8,12 +11,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SkyGrid extends JavaPlugin {
 
+	//public static Queue<ComplexBlock> blockQueue;
+	public static HashMap<String,Queue<ComplexBlock>> blockQueue;
+	
 	@Override
 	public void onEnable() {
 	
 		// TODO Auto-generated method stub
 		
 		getServer().getPluginManager().registerEvents(new SkyGridWorldListener(), this);
+		//SkyGrid.blockQueue = new LinkedList<ComplexBlock>();
+		SkyGrid.blockQueue = new HashMap<String,Queue<ComplexBlock>>();
 		this.getLogger().info("v" + this.getDescription().getVersion() + " enabled.");
 	}
 	
@@ -39,4 +47,6 @@ public class SkyGrid extends JavaPlugin {
 			event.getWorld().getPopulators().add(new SkyGridBlockPopulator());			
 		}
 	}
+	
+	
 }
