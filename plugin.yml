@@ -1,0 +1,6 @@
+load: STARTUP
+name: SkyGrid
+main: me.barry1990.skygrid.SkyGrid
+worlds:
+  world:
+    generator: SkyGrid

@@ -9,15 +9,30 @@ import org.bukkit.generator.ChunkGenerator;
 public class SkyGridGenerator extends ChunkGenerator {
 
 	@Override
-	public byte[][] generateBlockSections(World world, Random random, int x,
-			int z, BiomeGrid biomes) {
+	public byte[][] generateBlockSections(World world, Random random, int chunkX,
+			int chunkZ, BiomeGrid biomes) {
 	
 		byte[][] result = new byte[world.getMaxHeight() / 16][]; //world height / chunk part height (=16)
 		
-		/*
-		 *  Generate the grid 
-		 */
+		/* Generate the grid */
 		
+		for (int y = 0; y < 256; y++) {
+				
+			if (y % 3 != 0) 
+				continue;
+			
+			for (int z = 0;   z < 256; z++) {
+				
+				if (z % 3 != 0)
+					continue;
+				
+				for (int x = 0; x < 256; x++) {
+					
+					this.setBlock(result, x, y, z, (byte) BlockList.getRandomMaterial(random).getId());	
+					
+				}				
+			}			
+		}
 		
 		return result;
 	}

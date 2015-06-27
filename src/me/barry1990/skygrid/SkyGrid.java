@@ -13,13 +13,14 @@ public class SkyGrid extends JavaPlugin {
 		// TODO Auto-generated method stub
 		
 		getServer().getPluginManager().registerEvents(new SkyGridWorldListener(), this);
-		
+		this.getLogger().info("v" + this.getDescription().getVersion() + " enabled.");
 	}
 	
 	@Override
 	public void onDisable() {
 	
 		// TODO Auto-generated method stub
+		this.getLogger().info("v" + this.getDescription().getVersion() + " disabled.");
 		
 	}
 	
