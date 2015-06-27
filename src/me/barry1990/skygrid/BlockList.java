@@ -8,9 +8,12 @@ import org.bukkit.Material;
 public class BlockList {
 
 	//list of blocks used for the grid
+	static private Material[] common_materiallist = null;
+	static private Material[] rare_materiallist = null;
 	static private Material[] materiallist = null;
+	static private short[] materialListID = null;
 	
-	public static Material getRandomMaterial(Random random) {
+	public static short getRandomMaterial(Random random) {
 		
 		// init the list
 		if (BlockList.materiallist == null) {
@@ -53,8 +56,8 @@ public class BlockList {
 					Material.LOG_2,
 					Material.LEAVES_2,
 					
-					Material.WATER,
-					Material.LAVA,
+					//Material.WATER,
+					//Material.LAVA,
 
 					Material.LAPIS_ORE,
 					Material.GOLD_ORE,
@@ -92,7 +95,16 @@ public class BlockList {
 					};
 		}
 		
-		return BlockList.materiallist[random.nextInt(BlockList.materiallist.length)];
+		int materialListID_c = materiallist.length;
+		
+		if (materialListID == null) {
+			materialListID = new short[materialListID_c];
+			for (int i = 0; i< materialListID_c; i++) {
+				materialListID[i] = (short) materiallist[i].getId();
+			}
+		}		
+		
+		return BlockList.materialListID[random.nextInt(materialListID_c)];
 	}
 	
 }

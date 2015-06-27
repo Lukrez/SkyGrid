@@ -28,7 +28,7 @@ public class SkyGrid extends JavaPlugin {
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
 		this.getLogger().info("getDefaultWorldGenerator celled");
-		return new SkyGridGenerator(this);
+		return new SkyGridGenerator();
 	}
 	
 	
