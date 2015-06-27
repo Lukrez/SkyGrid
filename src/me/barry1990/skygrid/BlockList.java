@@ -15,14 +15,80 @@ public class BlockList {
 		// init the list
 		if (BlockList.materiallist == null) {
 			BlockList.materiallist = new Material[] { 
+					
+					Material.GRASS,  // Grass, Flowers
+					Material.DIRT, // Saplings
+					Material.SOIL, //Wheat, Cartots, Potatos
+					Material.SAND, // Cactue, Dead budh
+					Material.NETHERRACK, // Fire
+					Material.SOUL_SAND, // Netherwards
+					Material.MYCEL, // Mushrooms
+					
+					
+					
+					Material.DISPENSER,
+					Material.CHEST,
+					Material.MOB_SPAWNER,
+					Material.DROPPER,
+					Material.HOPPER,
+					Material.FURNACE,
+					
+					Material.COBBLESTONE,
 					Material.STONE,
-					Material.DIRT
+					Material.ICE,
+					Material.CLAY,
 					
-					/*
-					 * 
-					 */
+					Material.RED_SANDSTONE,					
+					Material.SNOW_BLOCK,	
+					Material.NETHER_BRICK,
+					Material.BRICK,
+					Material.ENDER_STONE,
+					Material.STAINED_CLAY,
+					Material.STAINED_GLASS,
+					Material.PRISMARINE,
+					Material.SEA_LANTERN,
 					
+					Material.LOG, // Cacao on Junglewood
+					Material.LEAVES,
+					Material.LOG_2,
+					Material.LEAVES_2,
 					
+					Material.WATER,
+					Material.LAVA,
+
+					Material.LAPIS_ORE,
+					Material.GOLD_ORE,
+					Material.IRON_ORE,
+					Material.QUARTZ_ORE,
+					Material.DIAMOND_ORE,
+					Material.COAL_BLOCK,
+					Material.COAL_ORE,
+					Material.SLIME_BLOCK,
+					Material.EMERALD_ORE,
+					Material.GLOWSTONE,
+					Material.REDSTONE_ORE,
+					
+					Material.HAY_BLOCK,
+					Material.SPONGE,
+					Material.GLASS,
+					Material.SANDSTONE,
+					Material.NOTE_BLOCK,
+					Material.WOOL,
+					Material.TNT,
+					Material.MOSSY_COBBLESTONE,
+					Material.OBSIDIAN,
+					Material.BOOKSHELF,
+					Material.WORKBENCH,
+					Material.JUKEBOX,
+					Material.PUMPKIN,
+					Material.JACK_O_LANTERN,
+					Material.CAKE_BLOCK, // mal sehen ob es geht
+					Material.MONSTER_EGG,
+					Material.IRON_BARDING,
+					Material.THIN_GLASS,
+					Material.MELON_BLOCK,
+					Material.ENDER_CHEST,
+					Material.WEB					
 					};
 		}
 		
