@@ -8,103 +8,128 @@ import org.bukkit.Material;
 public class BlockList {
 
 	//list of blocks used for the grid
-	static private Material[] common_materiallist = null;
-	static private Material[] rare_materiallist = null;
-	static private Material[] materiallist = null;
-	static private short[] materialListID = null;
+	static private Material[] materiallist0 = null;
+	static private Material[] materiallist1 = null;
+	static private Material[] materiallist2 = null;
+	static private Material[] materiallist3 = null;
+	static private Material[] materiallist4 = null;
 	
 	public static short getRandomMaterial(Random random) {
 		
 		// init the list
-		if (BlockList.materiallist == null) {
-			BlockList.materiallist = new Material[] { 
+		if (BlockList.materiallist0 == null) {
+			BlockList.materiallist0 = new Material[] { 
 					
 					Material.GRASS,  // Grass, Flowers
 					Material.DIRT, // Saplings
 					Material.SOIL, //Wheat, Cartots, Potatos
-					Material.SAND, // Cactue, Dead budh
+					Material.SAND, // Cactus, Dead bush
 					Material.NETHERRACK, // Fire
-					Material.SOUL_SAND, // Netherwards
-					Material.MYCEL, // Mushrooms
-					
-					
-					
-					Material.DISPENSER,
-					Material.CHEST,
-					Material.MOB_SPAWNER,
-					Material.DROPPER,
-					Material.HOPPER,
-					Material.FURNACE,
-					
+					Material.HAY_BLOCK,
 					Material.COBBLESTONE,
 					Material.STONE,
-					Material.ICE,
-					Material.CLAY,
-					
-					Material.RED_SANDSTONE,					
-					Material.SNOW_BLOCK,	
-					Material.NETHER_BRICK,
-					Material.BRICK,
-					Material.ENDER_STONE,
-					Material.STAINED_CLAY,
-					Material.STAINED_GLASS,
-					Material.PRISMARINE,
-					Material.SEA_LANTERN,
-					
 					Material.LOG, // Cacao on Junglewood
 					Material.LEAVES,
 					Material.LOG_2,
 					Material.LEAVES_2,
-					
-					//Material.WATER,
-					//Material.LAVA,
-
-					Material.LAPIS_ORE,
-					Material.GOLD_ORE,
-					Material.IRON_ORE,
-					Material.QUARTZ_ORE,
-					Material.DIAMOND_ORE,
+			};
+		}
+		if (BlockList.materiallist1 == null) {
+			BlockList.materiallist1 = new Material[] { 
+					// seldom 1
 					Material.COAL_BLOCK,
 					Material.COAL_ORE,
-					Material.SLIME_BLOCK,
-					Material.EMERALD_ORE,
-					Material.GLOWSTONE,
-					Material.REDSTONE_ORE,
-					
-					Material.HAY_BLOCK,
-					Material.SPONGE,
 					Material.GLASS,
 					Material.SANDSTONE,
-					Material.NOTE_BLOCK,
 					Material.WOOL,
-					Material.TNT,
-					Material.MOSSY_COBBLESTONE,
-					Material.OBSIDIAN,
 					Material.BOOKSHELF,
 					Material.WORKBENCH,
-					Material.JUKEBOX,
 					Material.PUMPKIN,
 					Material.JACK_O_LANTERN,
-					Material.CAKE_BLOCK, // mal sehen ob es geht
+					Material.CAKE_BLOCK,
+					Material.MELON_BLOCK,
+					Material.RED_SANDSTONE,					
+					Material.SNOW_BLOCK,	
+					Material.NETHER_BRICK,
+					Material.BRICK,
+			};
+		}
+		if (BlockList.materiallist2 == null) {
+			BlockList.materiallist2 = new Material[] { 
+					// seldom 2
+					Material.CLAY,
 					Material.MONSTER_EGG,
+					Material.WEB,
+					Material.NOTE_BLOCK,
+					Material.IRON_ORE,
+					Material.QUARTZ_ORE,
+					Material.MOSSY_COBBLESTONE,
 					Material.IRON_BARDING,
 					Material.THIN_GLASS,
-					Material.MELON_BLOCK,
+					Material.STAINED_CLAY,
+					Material.STAINED_GLASS,
+					Material.ICE,
+					Material.ENDER_STONE,
+
+			};
+		}
+		if (BlockList.materiallist3 == null) {
+			BlockList.materiallist3 = new Material[] { 
+					// seldom 3
+					Material.GOLD_ORE,
+					Material.LAPIS_ORE,
+					Material.OBSIDIAN,
+					Material.SLIME_BLOCK,
+					Material.GLOWSTONE,
+					Material.REDSTONE_ORE,
+					Material.PRISMARINE,
+					Material.SEA_LANTERN,
+					Material.DISPENSER,
+					Material.CHEST,
+					Material.DROPPER,
+					Material.HOPPER,
+					Material.FURNACE,
+					Material.STATIONARY_LAVA,
+					Material.STATIONARY_WATER,
+			};
+		}
+		if (BlockList.materiallist4 == null) {
+			BlockList.materiallist4 = new Material[] { 
+					// seldom 4
+					Material.MYCEL, // Mushrooms
+					Material.DIAMOND_ORE,
 					Material.ENDER_CHEST,
-					Material.WEB					
+					Material.SPONGE,
+					Material.JUKEBOX,
+					Material.EMERALD_ORE,
+					Material.MOB_SPAWNER,
+					Material.TNT,
+					Material.SOUL_SAND, // Netherwards
+					
 					};
 		}
 		
-		int materialListID_c = materiallist.length;
+		// select a random materiallist
 		
-		if (materialListID == null) {
-			materialListID = new short[materialListID_c];
-			for (int i = 0; i< materialListID_c; i++) {
-				materialListID[i] = (short) materiallist[i].getId();
-			}
-		}		
+		int randomList = random.nextInt(1000);
+		Material[] chosenList = null;
 		
-		return BlockList.materialListID[random.nextInt(materialListID_c)];
+		if (randomList < 50){
+			chosenList = BlockList.materiallist4;
+		} else if (randomList < 200){
+			chosenList = BlockList.materiallist3;
+		} else if (randomList < 400){
+			chosenList = BlockList.materiallist2;
+		} else if (randomList < 600){
+			chosenList = BlockList.materiallist1;
+		} else {
+			chosenList = BlockList.materiallist0;
+		}
+		
+		
+		int materialListID_c = chosenList.length;
+		
+		return (short)chosenList[random.nextInt(materialListID_c)].getId();
 	}
 	
 }
