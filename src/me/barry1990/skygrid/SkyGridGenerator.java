@@ -1,10 +1,13 @@
 package me.barry1990.skygrid;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
 
@@ -26,12 +29,14 @@ public class SkyGridGenerator extends ChunkGenerator {
 					
 					Material m = BlockList.getRandomMaterial(random);
 					switch (m) {
-						case STONE : {
+						/*case STONE : {
 							this.setBlock(result, x, y, z, BlockList.getRandomStoneType(random));
-						}
-						default:
+							break;
+						}*/
+						default: {
 							this.setBlock(result, x, y, z, (short) m.getId());
-					
+							break;	
+						}
 					}
 
 				}			
@@ -41,6 +46,11 @@ public class SkyGridGenerator extends ChunkGenerator {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public List<BlockPopulator> getDefaultPopulators(World world) {
+		return Arrays.asList((BlockPopulator)new SkyGridBlockPopulator());
 	}
 	
 	@Override
