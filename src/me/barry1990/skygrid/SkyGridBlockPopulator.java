@@ -12,8 +12,6 @@ import org.bukkit.block.Chest;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Wool;
-
 
 public class SkyGridBlockPopulator extends BlockPopulator {
 
