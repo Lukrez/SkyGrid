@@ -32,9 +32,9 @@ public class SkyGridGenerator extends ChunkGenerator {
 		short[][] result = new short[world.getMaxHeight() / 16][]; //world height / chunk part height (=16)
 		
 		/* generate empty queue for chunk*/
-		List<ComplexBlock> queue = new LinkedList<ComplexBlock>();
+		List<ComplexBlock> list = new LinkedList<ComplexBlock>();
 		String key = chunkX+";"+chunkZ;
-		SkyGrid.blockQueue.put(key,queue);
+		SkyGrid.blockQueue.put(key,list);
 		
 		/* generate the grid */
 		
@@ -73,16 +73,16 @@ public class SkyGridGenerator extends ChunkGenerator {
 						}
 						case CHEST: {
 							ComplexBlock cb = new ComplexBlock(material,null, x+chunkX*16, y, z+chunkZ*16);
-							queue.add(cb);
+							list.add(cb);
 							break;
 						}
-						case SOIL: {
+						/*case SOIL: {
 							Material crop = RandomBlockAppendix.getRandomCrop(random);
 							this.setBlock(result, x, y+1, z, crop);
-							ComplexBlock cb = new ComplexBlock(material,new Crops(CropState.SEEDED), x+chunkX*16, y, z+chunkZ*16);
-							queue.add(cb);
+							ComplexBlock cb = new ComplexBlock(material,new Crops(CropState.SEEDED), x+chunkX*16, y+1, z+chunkZ*16);
+							list.add(cb);
 							break;
-						}						
+						}	*/					
 						case SAND: {
 							if (random.nextInt(100) <= 2) {
 								this.setBlock(result, x, y+1, z, Material.SUGAR_CANE_BLOCK);
@@ -97,17 +97,24 @@ public class SkyGridGenerator extends ChunkGenerator {
 						}
 						case MYCEL: {
 							Material mushroom = random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
-							this.setBlock(result, x, y+1, z, mushroom);
-							ComplexBlock cb = new ComplexBlock(material,new Crops(CropState.SEEDED), x+chunkX*16, y, z+chunkZ*16);
-							queue.add(cb);
+							this.setBlock(result, x, y+1, z, mushroom);							
 							break;
 						}
+						case DIRT: {
+							if (random.nextInt(100) <= 2) {
+								this.setBlock(result, x, y+1, z, Material.SAPLING);
+								ComplexBlock cb = new ComplexBlock(material,new Tree(RandomMetaDataGenerator.getTreeSpecies(Material.SAPLING, random)), x+chunkX*16, y+1, z+chunkZ*16);
+								list.add(cb);
+								break;
+							}								
+						}
+						
 						default:
 							break;
 					}
 					if (materialdata != null) {
 						ComplexBlock cb = new ComplexBlock(material,materialdata, x+chunkX*16, y, z+chunkZ*16);
-						queue.add(cb);
+						list.add(cb);
 					}
 				}
 				
@@ -207,6 +214,10 @@ public class SkyGridGenerator extends ChunkGenerator {
 	    	}
 	    	if (m == Material.LEAVES_2 | m == Material.LOG_2) {
 	    		return random.nextBoolean() ? TreeSpecies.ACACIA : TreeSpecies.REDWOOD;
+	    	}
+	    	if (m == Material.SAPLING) {
+	    		int x = random.nextInt(TreeSpecies.class.getEnumConstants().length);
+		        return TreeSpecies.class.getEnumConstants()[x];
 	    	}	    	
 	    	//we should never get here
 	    	return TreeSpecies.GENERIC;
