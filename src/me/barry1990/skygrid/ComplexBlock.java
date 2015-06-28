@@ -1,6 +1,7 @@
 package me.barry1990.skygrid;
 
 import org.bukkit.Material;
+import org.bukkit.material.MaterialData;
 
 public class ComplexBlock {
 
@@ -8,12 +9,14 @@ public class ComplexBlock {
 	public int y;
 	public int z;
 	public Material material;
+	public MaterialData materialData;
 	
-	public ComplexBlock(Material m, int x, int y, int z){
+	public ComplexBlock(Material m,MaterialData md, int x, int y, int z){
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.material = m;
+		this.materialData = md;
 	}
 	
 	public String toString(){

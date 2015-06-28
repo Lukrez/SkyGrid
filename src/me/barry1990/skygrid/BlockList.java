@@ -16,6 +16,7 @@ public class BlockList {
 
 	
 	public static Material getRandomMaterial(Random random) {
+	
 		
 		// init the list
 		if (BlockList.materiallist0 == null) {
@@ -127,6 +128,7 @@ public class BlockList {
 		
 		
 		return chosenList[random.nextInt(chosenList.length)];
+		
 	}
 		
 }
