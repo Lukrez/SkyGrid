@@ -67,6 +67,11 @@ public class SkyGridGenerator extends ChunkGenerator {
 							materialdata = RandomMetaDataGenerator.getMonsterEggs(random);
 							break;
 						}
+						case CHEST: {
+							ComplexBlock cb = new ComplexBlock(material,null, x+chunkX*16, y, z+chunkZ*16);
+							queue.add(cb);
+							break;
+						}
 						default:
 							break;
 					}

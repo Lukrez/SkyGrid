@@ -3,6 +3,7 @@ package me.barry1990.skygrid;
 import java.util.Queue;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -15,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class SkyGridBlockPopulator extends BlockPopulator {
 
+	static final int chestsize = 27;
+	
 	@Override
 	public void populate(World world, Random random, Chunk chunk) {
 
@@ -25,7 +28,8 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 			while (!queue.isEmpty()){
 				ComplexBlock cb = queue.remove();
 				Block block = world.getBlockAt(cb.x, cb.y, cb.z);
-				block.setData(cb.materialData.getData());
+				if (cb.materialData != null)
+					block.setData(cb.materialData.getData());
 			
 				if (cb.material == Material.CHEST){
 					Chest chest = (Chest)block.getState();
@@ -46,10 +50,10 @@ public class SkyGridBlockPopulator extends BlockPopulator {
     }
 	
 	public static void setRandomInventoryContent(Inventory inv, Random random){
-
+		
 		ItemStack[] items = new ItemStack[inv.getSize()];
 		
-		for (int i=0; i<inv.getSize(); i++){
+		for (int i=0; i<chestsize; i++){
 			
 			items[i] = ItemList.getRandomItemstack(random);
 			if (random.nextFloat() < 0.1)
