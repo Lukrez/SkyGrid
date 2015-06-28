@@ -22,19 +22,17 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 
 		// get queue
 		String key = chunk.getX()+";"+chunk.getZ();
-		Queue<ComplexBlock> queue = SkyGrid.blockQueue.get(key);
+		Queue<ComplexBlock> queue = SkyGrid.blockQueue.get(key);		
 		if (queue != null){
 			while (!queue.isEmpty()){
 				ComplexBlock cb = queue.remove();
 				Block block = world.getBlockAt(cb.x, cb.y, cb.z);
+				block.setData(cb.materialData.getData());
+			
 				if (cb.material == Material.CHEST){
 					Chest chest = (Chest)block.getState();
 					Inventory inv = chest.getInventory();
 					setRandomInventoryContent(inv,random);
-				}
-				if (cb.material == Material.WOOL && block.getState() instanceof Wool){
-					SkyGrid.getSkyGridPlugin().getLogger().info("Wolle gesetzt");
-					((Wool) block.getState()).setColor(/*getRandomDyeColor(random)*/DyeColor.YELLOW);						
 				}
 						
 			}
