@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.CropState;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +14,7 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.material.Crops;
 import org.bukkit.material.DirectionalContainer;
 import org.bukkit.material.MaterialData;
 import org.bukkit.material.MonsterEggs;
@@ -44,7 +46,7 @@ public class SkyGridGenerator extends ChunkGenerator {
 					
 					Material material = BlockList.getRandomMaterial(random);
 					
-					this.setBlock(result, x, y, z, (short)material.getId() );
+					this.setBlock(result, x, y, z, material);
 					MaterialData materialdata = null;
 					switch (material) {
 						case WOOL : {				
@@ -71,6 +73,32 @@ public class SkyGridGenerator extends ChunkGenerator {
 						}
 						case CHEST: {
 							ComplexBlock cb = new ComplexBlock(material,null, x+chunkX*16, y, z+chunkZ*16);
+							queue.add(cb);
+							break;
+						}
+						case SOIL: {
+							Material crop = RandomBlockAppendix.getRandomCrop(random);
+							this.setBlock(result, x, y+1, z, crop);
+							ComplexBlock cb = new ComplexBlock(material,new Crops(CropState.SEEDED), x+chunkX*16, y, z+chunkZ*16);
+							queue.add(cb);
+							break;
+						}						
+						case SAND: {
+							if (random.nextInt(100) <= 2) {
+								this.setBlock(result, x, y+1, z, Material.SUGAR_CANE_BLOCK);
+								switch (random.nextInt(4)) {
+									case 0 : {this.setBlock(result, x+1, y, z, Material.STATIONARY_WATER); break;}
+									case 1 : {this.setBlock(result, x-1, y, z, Material.STATIONARY_WATER); break;}
+									case 2 : {this.setBlock(result, x, y, z+1, Material.STATIONARY_WATER); break;}
+									case 3 : {this.setBlock(result, x, y, z-1, Material.STATIONARY_WATER); break;}
+								}
+							}
+							break;
+						}
+						case MYCEL: {
+							Material mushroom = random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
+							this.setBlock(result, x, y+1, z, mushroom);
+							ComplexBlock cb = new ComplexBlock(material,new Crops(CropState.SEEDED), x+chunkX*16, y, z+chunkZ*16);
 							queue.add(cb);
 							break;
 						}
@@ -103,14 +131,14 @@ public class SkyGridGenerator extends ChunkGenerator {
         return new Location(world, x*4+1, 122, z*4+1);
     }		
 	
-    void setBlock(short[][] result, int x, int y, int z, short blkid) {
+    void setBlock(short[][] result, int x, int y, int z, Material material) {
 	    // is this chunk part already initialized?
 	    if (result[y >> 4] == null) {
 		    // Initialize the chunk part
 		    result[y >> 4] = new short[4096];
 	    }
 	    // set the block
-	    result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
+	    result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = (short) material.getId();
     }
     
     
@@ -186,6 +214,22 @@ public class SkyGridGenerator extends ChunkGenerator {
 	    }
 	    
     }
-
+    
+    private static class RandomBlockAppendix {
+    	
+    	private static Material croplist[] = null;
+    	
+    	public static Material getRandomCrop(Random random) {
+    		if (croplist == null) {
+    			croplist = new Material[] {
+    				Material.CROPS,
+    				Material.CARROT,
+    				Material.POTATO
+    			};
+    		}
+    		
+    		return croplist[random.nextInt(croplist.length)];
+    	}
+    }
     
 }
