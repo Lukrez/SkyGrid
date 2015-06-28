@@ -8,7 +8,10 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Wool;
 
 
@@ -24,7 +27,13 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 			while (!queue.isEmpty()){
 				ComplexBlock cb = queue.remove();
 				Block block = world.getBlockAt(cb.x, cb.y, cb.z);
-				 block.setData(DyeColor.MAGENTA.getWoolData());
+				if (cb.material == Material.CHEST){
+					Chest chest = (Chest)block.getState();
+					Inventory inv = chest.getInventory();
+					setRandomInventoryContent(inv,random);
+					
+				}
+				 //block.setData(DyeColor.MAGENTA.getWoolData());
 				 //if (block.getState() instanceof Wool) {
 					 	
 		               //((Wool) block.getState()).setColor(DyeColor.MAGENTA);
@@ -52,7 +61,7 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 			}
 		}
 		
-		SkyGrid.getSkyGridPlugin().getLogger().info("YEAH BABY!");
+		//SkyGrid.getSkyGridPlugin().getLogger().info("YEAH BABY!");
 		
 	}
 	
@@ -60,5 +69,18 @@ public class SkyGridBlockPopulator extends BlockPopulator {
         int x = random.nextInt(Material.class.getEnumConstants().length);
         return DyeColor.class.getEnumConstants()[x];
     }
+	
+	public static void setRandomInventoryContent(Inventory inv, Random random){
 
+		ItemStack[] items = new ItemStack[inv.getSize()];
+		
+		for (int i=0; i<inv.getSize(); i++){
+			
+			items[i] = ItemList.getRandomItemstack(random);
+			if (random.nextFloat() < 0.1)
+				break;
+		}
+		
+		inv.setContents(items);
+	}
 }

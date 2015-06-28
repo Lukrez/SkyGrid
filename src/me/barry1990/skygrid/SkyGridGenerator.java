@@ -33,12 +33,12 @@ public class SkyGridGenerator extends ChunkGenerator {
 			for (int z = 1; z < 16; z=z+4) {
 							
 				for (int x = 1; x < 16; x=x+4) {
-						Material material = BlockList.getRandomMaterial(random);
-						this.setBlock(result, x, y, z, (short)material.getId() );
-						if (material == Material.WOOL){
-							ComplexBlock cb = new ComplexBlock(material, x+chunkX*16, y, z+chunkZ*16);
-							queue.add(cb);				
-						}
+					Material material = BlockList.getRandomMaterial(random);
+					this.setBlock(result, x, y, z, (short)material.getId() );
+					if (material == Material.CHEST){
+						ComplexBlock cb = new ComplexBlock(material, x+chunkX*16, y, z+chunkZ*16);
+						queue.add(cb);				
+					}
 				}			
 				
 			}
@@ -56,7 +56,9 @@ public class SkyGridGenerator extends ChunkGenerator {
 	@Override
     public Location getFixedSpawnLocation(World world, Random random)
     {
-        return new Location(world, 1, 122, 1);
+		int x = random.nextInt(100)-50;
+		int z = random.nextInt(100)-50;
+        return new Location(world, x*4+1, 122, z*4+1);
     }		
 	
     void setBlock(short[][] result, int x, int y, int z, short blkid) {

@@ -30,9 +30,7 @@ public class BlockList {
 					Material.COBBLESTONE,
 					Material.STONE,
 					Material.LOG, // Cacao on Junglewood
-					Material.LEAVES,
 					Material.LOG_2,
-					Material.LEAVES_2,
 			};
 		}
 		if (BlockList.materiallist1 == null) {
@@ -40,6 +38,7 @@ public class BlockList {
 					// seldom 1
 					Material.COAL_BLOCK,
 					Material.COAL_ORE,
+					Material.MONSTER_EGGS,
 					Material.GLASS,
 					Material.SANDSTONE,
 					Material.WOOL,
@@ -59,7 +58,6 @@ public class BlockList {
 			BlockList.materiallist2 = new Material[] { 
 					// seldom 2
 					Material.CLAY,
-					Material.MONSTER_EGG,
 					Material.WEB,
 					Material.NOTE_BLOCK,
 					Material.IRON_ORE,
