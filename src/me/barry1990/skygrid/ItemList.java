@@ -113,28 +113,39 @@ public class ItemList {
 			int randomList = random.nextInt(1000);
 			Material[] chosenList = null;
 			int maxAmount;
+			double prob;
 			if (randomList < 50){
 				chosenList = ItemList.materiallist4;
 				maxAmount = 3;
+				prob = 0.25;
 			} else if (randomList < 200){
 				chosenList = ItemList.materiallist3;
 				maxAmount = 4;
+				prob = 0.5;
 			} else if (randomList < 400){
 				chosenList = ItemList.materiallist2;
 				maxAmount = 15;
+				prob = 0.75;
 			} else if (randomList < 600){
 				chosenList = ItemList.materiallist1;
 				maxAmount = 20;
+				prob = 0.9;
 			} else {
 				chosenList = ItemList.materiallist0;
 				maxAmount = 32;
+				prob = 0.9;
 			}
 			Material randomMaterial = chosenList[random.nextInt(chosenList.length)];
 			ItemStack item = new ItemStack(randomMaterial,1);
 			if (item.getMaxStackSize() < maxAmount){
 				maxAmount = item.getMaxStackSize();
 			}
-			int amount = random.nextInt(maxAmount)+1;
+			int amount = 0;
+			for (int i=0; i < maxAmount; i++){
+				amount += 1;
+				if (random.nextFloat() > prob)
+					break;
+			}
 			item.setAmount(amount);
 			return item;
 		}

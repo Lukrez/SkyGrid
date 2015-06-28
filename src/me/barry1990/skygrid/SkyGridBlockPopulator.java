@@ -51,14 +51,13 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 	public static void setRandomInventoryContent(Inventory inv, Random random){
 		
 		ItemStack[] items = new ItemStack[inv.getSize()];
-		
-		for (int i=0; i<inv.getSize(); i++){
+		int i=0;
+		for (; i<inv.getSize(); i++){
 			
 			items[i] = ItemList.getRandomItemstack(random);
-			if (random.nextFloat() < 0.1)
+			if (random.nextFloat() > 0.75)
 				break;
-		}
-		
+		}		
 		inv.setContents(items);		
 	}
 }
