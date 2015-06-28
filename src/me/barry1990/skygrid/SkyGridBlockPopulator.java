@@ -24,41 +24,13 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 			while (!queue.isEmpty()){
 				ComplexBlock cb = queue.remove();
 				Block block = world.getBlockAt(cb.x, cb.y, cb.z);
-				 block.setData(DyeColor.MAGENTA.getWoolData());
-				 //if (block.getState() instanceof Wool) {
-					 	
-		               //((Wool) block.getState()).setColor(DyeColor.MAGENTA);
-		              
-		          // }
-						
+				block.setData(cb.materialData.getData());						
 			}
 			// delete queue
 			SkyGrid.blockQueue.remove(key);
 		}
 		
-		
-		
-		
-		/* generate random wool */		
-		for (int y = 0; y < 256; y++) {		
-			for (int z = 0; z < 16; z++) {							
-				for (int x = 0; x < 16; x++) {
-					Block block = world.getBlockAt((chunk.getX() << 4) | x, y, (chunk.getZ() << 4) | z);
-					if (block.getState() instanceof Wool) {
-						SkyGrid.getSkyGridPlugin().getLogger().info("Wolle gesetzt");
-						((Wool) block.getState()).setColor(/*getRandomDyeColor(random)*/DyeColor.YELLOW);						
-					}
-				}
-			}
-		}
-		
 		SkyGrid.getSkyGridPlugin().getLogger().info("YEAH BABY!");
 		
 	}
-	
-	public static DyeColor getRandomDyeColor(Random random) {
-        int x = random.nextInt(Material.class.getEnumConstants().length);
-        return DyeColor.class.getEnumConstants()[x];
-    }
-
 }
