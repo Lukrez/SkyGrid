@@ -1,6 +1,7 @@
 package me.barry1990.skygrid;
+
 import java.util.HashMap;
-import java.util.Queue;
+import java.util.List;
 
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,14 +10,14 @@ public class SkyGrid extends JavaPlugin {
 	
 	private static SkyGrid plugin = null;
 
-	public static HashMap<String,Queue<ComplexBlock>> blockQueue;
+	public static HashMap<String,List<ComplexBlock>> blockQueue;
 	
 	@Override
 	public void onEnable() {
 		
 		plugin = this;
 
-		SkyGrid.blockQueue = new HashMap<String,Queue<ComplexBlock>>();
+		SkyGrid.blockQueue = new HashMap<String,List<ComplexBlock>>();
 		this.getLogger().info("v" + this.getDescription().getVersion() + " enabled.");
 	}
 	

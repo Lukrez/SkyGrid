@@ -1,8 +1,7 @@
 package me.barry1990.skygrid;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,12 +10,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.World;
+import org.bukkit.block.BlockFace;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
-
-
-import org.bukkit.block.BlockFace;
-import org.bukkit.material.*;
+import org.bukkit.material.DirectionalContainer;
+import org.bukkit.material.MaterialData;
+import org.bukkit.material.MonsterEggs;
+import org.bukkit.material.Pumpkin;
+import org.bukkit.material.Tree;
+import org.bukkit.material.Wool;
 
 
 public class SkyGridGenerator extends ChunkGenerator {
@@ -28,7 +30,7 @@ public class SkyGridGenerator extends ChunkGenerator {
 		short[][] result = new short[world.getMaxHeight() / 16][]; //world height / chunk part height (=16)
 		
 		/* generate empty queue for chunk*/
-		Queue<ComplexBlock> queue = new LinkedList<ComplexBlock>();
+		List<ComplexBlock> queue = new LinkedList<ComplexBlock>();
 		String key = chunkX+";"+chunkZ;
 		SkyGrid.blockQueue.put(key,queue);
 		

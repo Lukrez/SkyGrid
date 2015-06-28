@@ -1,9 +1,8 @@
 package me.barry1990.skygrid;
 
-import java.util.Queue;
+import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -23,22 +22,22 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 
 		// get queue
 		String key = chunk.getX()+";"+chunk.getZ();
-		Queue<ComplexBlock> queue = SkyGrid.blockQueue.get(key);		
-		if (queue != null){
-			while (!queue.isEmpty()){
-				ComplexBlock cb = queue.remove();
+		List<ComplexBlock> list = SkyGrid.blockQueue.get(key);		
+		if (list != null){
+			for (ComplexBlock cb : list) {
 				Block block = world.getBlockAt(cb.x, cb.y, cb.z);
-				if (cb.materialData != null)
-					block.setData(cb.materialData.getData());
 			
 				if (cb.material == Material.CHEST){
 					Chest chest = (Chest)block.getState();
 					Inventory inv = chest.getInventory();
 					setRandomInventoryContent(inv,random);
+				} else {
+					block.setData(cb.materialData.getData());
 				}
 						
 			}
-			// delete queue
+			// delete list
+			list.clear();			
 			SkyGrid.blockQueue.remove(key);
 		}
 
@@ -53,7 +52,7 @@ public class SkyGridBlockPopulator extends BlockPopulator {
 		
 		ItemStack[] items = new ItemStack[inv.getSize()];
 		
-		for (int i=0; i<chestsize; i++){
+		for (int i=0; i<inv.getSize(); i++){
 			
 			items[i] = ItemList.getRandomItemstack(random);
 			if (random.nextFloat() < 0.1)
